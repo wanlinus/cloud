@@ -31,9 +31,12 @@ function clear() {
     for (( i = 0; i < ${client_num}; ++i )); do
         docker rm $(docker kill client-node${i})
     done
-    docker rm $(docker kill ribbon)
-    docker rm $(docker kill eureka-server)
-    docker rm $(docker kill feign)
+    docker kill ribbon
+    docker rm ribbon
+    docker kill eureka-server
+    docker rm eureka-server
+    docker kill feign
+    docker rm feign
 
 }
 function usage() {

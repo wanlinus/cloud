@@ -2,7 +2,11 @@ server:
   port: 8000
 eureka:
   instance:
-    hostname: eureka-server
+    hostname: eureka-server       #默认注册到服务中心,显示的名称是hostname+appname+port
+    non-secure-port-enabled: true #开启不安全通信的端口,就是使用http进行通信
+    non-secure-port: 80           #设置不安全端口号
+    secure-port-enabled: false    #开启安全通信端口,使用https进行通信
+    secure-port: 443              #设置安全通信端口号
   client:
     #表示是否将自己注册到Eureka Server，默认为true。
     register-with-eureka: false
