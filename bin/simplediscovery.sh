@@ -30,7 +30,8 @@ function install() {
 
 function clear() {
     for (( i = 0; i < ${client_num}; ++i )); do
-        docker rm $(docker kill client-node${i})
+        docker kill client-node${i}
+        docker rm client-node${i}
     done
     docker kill ribbon
     docker rm ribbon
