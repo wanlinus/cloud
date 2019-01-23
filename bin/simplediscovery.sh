@@ -24,17 +24,16 @@ function install() {
     done
 
     docker run -d -p 9100:9100 --net=${net_cloud} --name=ribbon ribbon
+    docker run -d -p 9200:9200 --net=${net_cloud} --name=feign feign
 }
 
 function clear() {
     for (( i = 0; i < ${client_num}; ++i )); do
-        docker kill client-node${i}
-        docker rm client-node${i}
+        docker rm $(docker kill client-node${i})
     done
-    docker kill ribbon
-    docker rm ribbon
-    docker kill eureka-server
-    docker rm eureka-server
+    docker rm $(docker kill ribbon)
+    docker rm $(docker kill eureka-server)
+    docker rm $(docker kill feign)
 
 }
 function Usage() {
