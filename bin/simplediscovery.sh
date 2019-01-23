@@ -36,14 +36,14 @@ function clear() {
     docker rm $(docker kill feign)
 
 }
-function Usage() {
+function usage() {
     echo "Operation Manual: $0 [-h] [-i|install] [-c|clear]"
     echo "  $0 -i       create eureka server and some clients, expose 8000 port"
     echo "  $0 -c       clear docker and network"
 }
 
 if [[ $# -eq 0 ]]; then
-    Usage
+    usage
     exit 0
 fi
 while getopts "ic" opt; do
@@ -51,7 +51,7 @@ while getopts "ic" opt; do
         i)
             install
             echo "create eureka server client ribbon success"
-            echo "server port 8000, ribbon port 9100"
+            echo "server port 8000, ribbon port 9100, feign port 9200"
             ;;
         c)
             clear
