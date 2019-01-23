@@ -18,7 +18,7 @@ public class RibbonController {
     private HelloService helloService;
 
     @GetMapping
-    public String accessClient(@RequestParam(defaultValue = "str default value") String str) {
-        return helloService.hiService(str);
+    public String accessClient(@RequestParam(defaultValue = "ribbon default value") String ribbon) {
+        return helloService.hiService(ribbon);
     }
 }

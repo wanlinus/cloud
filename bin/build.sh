@@ -10,3 +10,5 @@ cd ../service-ribbon
 docker build -t ribbon .
 cd ../service-feign
 docker build -t feign .
+cd ../service-zuul
+docker build -t zuul .

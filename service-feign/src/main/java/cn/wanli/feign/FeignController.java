@@ -18,7 +18,7 @@ public class FeignController {
     private ScheduleServiceHi hi;
 
     @GetMapping
-    public String fi(@RequestParam(defaultValue = "default") String name) {
-        return hi.hello(name);
+    public String fi(@RequestParam(defaultValue = "feign default value") String feign) {
+        return hi.hello(feign);
     }
 }

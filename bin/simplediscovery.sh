@@ -25,6 +25,7 @@ function install() {
 
     docker run -d -p 9100:9100 --net=${net_cloud} --name=ribbon ribbon
     docker run -d -p 9200:9200 --net=${net_cloud} --name=feign feign
+    docker run -d -p 9300:9300 --net=${net_cloud} --name=zuul zuul
 }
 
 function clear() {
@@ -37,6 +38,8 @@ function clear() {
     docker rm eureka-server
     docker kill feign
     docker rm feign
+    docker kill zuul
+    docker rm zuul
 
 }
 function usage() {
