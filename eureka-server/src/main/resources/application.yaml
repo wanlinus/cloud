@@ -2,7 +2,7 @@ server:
   port: 8000
 eureka:
   instance:
-    hostname: localhost
+    hostname: eureka-server
   client:
     #表示是否将自己注册到Eureka Server，默认为true。
     register-with-eureka: false

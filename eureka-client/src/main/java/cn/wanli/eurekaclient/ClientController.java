@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 /**
  * @author wanli
  * @date 2019-01-22 14:23
@@ -23,7 +26,11 @@ public class ClientController {
     }
 
     @GetMapping("hello")
-    public String hello(@RequestParam String name) {
-        return "hello: " + name + "<br />this application port is: " + port;
+    public String hello(@RequestParam String name) throws UnknownHostException {
+        InetAddress addr = InetAddress.getLocalHost();
+        String ip = addr.getHostAddress();
+        String hostName = addr.getHostName();
+        return String.format("hello: %s<br />this docker ip:%s:%s <br />hostname:%s",
+                name, ip, port, hostName);
     }
 }
