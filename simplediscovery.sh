@@ -3,6 +3,20 @@
 net_cloud='cloud'
 client_num=3
 
+function build() {
+    mvn clean package -Dmaven.test.skip=true
+    cd eureka-server
+    docker build -t eureka-server .
+    cd ../eureka-client
+    docker build -t eureka-client .
+    cd ../service-ribbon
+    docker build -t ribbon .
+    cd ../service-feign
+    docker build -t feign .
+    cd ../service-zuul
+    docker build -t zuul .
+}
+
 function createNet() {
     docker network ls | awk '{print $2}' | grep ${net_cloud}
     if [[ $? -eq 1 ]]; then
@@ -45,6 +59,7 @@ function clear() {
 }
 function usage() {
     echo "Operation Manual: $0 [-h] [-i|install] [-c|clear]"
+    echo "  $0 -b       build cloud project"
     echo "  $0 -i       create eureka server and some clients, expose 8000 port"
     echo "  $0 -c       clear docker and network"
 }
@@ -53,8 +68,11 @@ if [[ $# -eq 0 ]]; then
     usage
     exit 0
 fi
-while getopts "ic" opt; do
+while getopts "bic" opt; do
     case ${opt} in
+        b)
+            build
+            ;;
         i)
             install
             echo "create eureka server client ribbon success"
